@@ -10,7 +10,8 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var assert = require("chai").assert,
+var path = require("path"),
+    assert = require("chai").assert,
     sinon = require("sinon"),
     pathUtil = require("../../../lib/util/path-util");
 
@@ -73,7 +74,7 @@ describe("pathUtil", function() {
             var basePath = "/absolute/";
             var result = pathUtil.getRelativePath(filePath, basePath);
 
-            assert.equal(result, "file/path.js");
+            assert.equal(result, path.normalize("file/path.js"));
         });
 
         it("should throw if the base path is not absolute", function() {

@@ -62,14 +62,15 @@ describe("globUtil", function() {
             assert.deepEqual(result, ["one-js-file/**/*.js"]);
         });
 
-        it("should convert an absolute directory name with no provided extensions into a glob pattern", function() {
+        it("should convert an absolute directory name with no provided extensions into a posix glob pattern", function() {
             var patterns = [getFixturePath("glob-util", "one-js-file")];
             var opts = {
                 cwd: getFixturePath("glob-util")
             };
             var result = globUtil.resolveFileGlobPatterns(patterns, opts);
+            var expected = [getFixturePath("glob-util", "one-js-file").replace(/\\/g, "/") + "/**/*.js"];
 
-            assert.deepEqual(result, [getFixturePath("glob-util", "one-js-file") + "/**/*.js"]);
+            assert.deepEqual(result, expected);
         });
 
         it("should convert a directory name with a single provided extension into a glob pattern", function() {
